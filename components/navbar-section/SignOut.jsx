@@ -6,8 +6,7 @@ export default function SignOut() {
     <button
       type="button"
       onClick={() => {
-        // signOut({ redirectTo: "/" });
-        signOut({ redirectTo: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/` });
+        signOut({ redirectTo: "/" });
       }}
     >
       SignOut

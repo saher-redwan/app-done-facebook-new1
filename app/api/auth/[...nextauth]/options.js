@@ -143,6 +143,9 @@ export const options = {
       // this return for other providers...
       return true;
     },
+    async redirect({ url, baseUrl }) {
+      return `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`;
+    },
   },
   pages: {
     signIn: "/signin",
