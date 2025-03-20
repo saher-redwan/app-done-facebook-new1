@@ -144,7 +144,7 @@ export const options = {
       return true;
     },
     async redirect({ url, baseUrl }) {
-      // default baseUrl is NEXTAUTH_URL
+      // default baseUrl is NEXTAUTH_URL, but because I need to use it in client side I use NEXT_PUBLIC_
       return `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`;
     },
   },

@@ -12,11 +12,6 @@ export default function LoadingOfPreparingFiles() {
     document.body.appendChild(ref.current);
   }, []);
 
-  useEffect(() => {
-    console.log(":::::::::: LoadingOfPreparingFiles 1");
-    console.log(":::::::::: LoadingOfPreparingFiles 2");
-  })
-
   return (
     <>
       <div
