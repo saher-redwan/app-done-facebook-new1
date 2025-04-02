@@ -10,6 +10,7 @@ import HomeSvg from "@/components/svgs/HomeSvg";
 import ProfileSvg from "@/components/svgs/ProfileSvg";
 import LogoutSvg from "@/components/svgs/LogoutSvg";
 import GameSvg from "@/components/svgs/GameSvg";
+import SettingsSvg from "@/components/svgs/SettingsSvg";
 
 const GlobalContext = createContext();
 
@@ -45,9 +46,9 @@ export const GlobalContextProvider = ({ children }) => {
       icon: AddPostSvg,
       // imgStyle: "grayscale-[0.4] scale-[0.95]",
       style: { scale: "0.9" },
+      active: false,
       // groupHover: 'group-hover:transform group-hover:skew-y-[20deg] group-hover:skew-x-[-10deg] group-hover:rotate-3d-[1,1,1,35deg] group-hover:rotate-[50deg]',
       hoverSvgEffect: true,
-      active: false,
     },
     {
       link: `/profile/${user?._id}`,
@@ -68,20 +69,24 @@ export const GlobalContextProvider = ({ children }) => {
       active: false,
     },
     {
+      link: "/settings",
+      text: "settings",
+      icon: SettingsSvg,
+      active: false,
+      style: { scale: "0.8" },
+      hoverSvgEffect: true,
+
+    },
+    {
       link: "/admin-page",
       text: "admin page",
       icon: HomeSvg,
       active: false,
     },
-    {
-      link: "/settings",
-      text: "settings",
-      icon: HomeSvg,
-      active: false,
-    },
+
     {
       link: "/admin-page",
-      text: "for admin",
+      text: "admin page",
       icon: HomeSvg,
       active: false,
     },

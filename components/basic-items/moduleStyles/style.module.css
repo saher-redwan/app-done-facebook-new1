@@ -1,3 +1,13 @@
 .hoverEffect_Add:hover svg {
   transform: skewY(20deg) skewX(-10deg) rotate3d(1, 1, 1, 35deg) rotate(50deg);
 }
+.hoverEffect_Settings:hover svg {
+  rotate: 45deg;
+  scale: 0.925;
+}
+
+.hoverEffect_Add:hover svg,
+.hoverEffect_Settings:hover svg {
+  transition: 0.25s;
+  transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}

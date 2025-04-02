@@ -1,12 +1,12 @@
 "use client";
 
-import style_links from "./moduleStyles/style.module.css";
 // import Link from "next/link";
 import Link from "./Link";
 import { signOut } from "next-auth/react";
 import { useGlobalContext } from "@/context/store";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import style_links from "./moduleStyles/style.module.css";
 
 export default function MainLinksMenu({
   forMobileStyle,
@@ -94,6 +94,17 @@ function LinkItem({ link, toggleOpenSheet }) {
     );
   }
 
+  function chechTextOfLinks(link) {
+    if (link?.hoverSvgEffect) {
+      switch (link.link) {
+        case "/settings":
+          return style_links.hoverEffect_Settings;
+        case "/addPost":
+          return style_links.hoverEffect_Add;
+      }
+    }
+  }
+
   // these for links
   return (
     <div onClick={toggleOpenSheet}>
@@ -104,7 +115,7 @@ function LinkItem({ link, toggleOpenSheet }) {
         href={link.link}
         key={Math.random()}
         className={`${link.active ? "active-link" : ""} ${
-          link?.hoverSvgEffect ? style_links.hoverEffect_Add : ""
+          link?.hoverSvgEffect ? chechTextOfLinks(link) : ""
         } ${classText}`}
         onClick={() => link.text == "logOut" && signOut()}
       >
