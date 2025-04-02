@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Card from "./card";
+import Card from "./Card";
 import GameOver from "./GameOver";
 import confetti from "canvas-confetti";
 import winningTone from "@/public/sounds/winning-tone.wav";
