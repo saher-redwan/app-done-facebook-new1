@@ -1,5 +1,6 @@
 import EditTaskForm from "@/components/posts-section/EditTaskForm";
 import fetchData from "@/components/custom-hooks/fetchData";
+import MainContainer from "@/components/basic-items/MainContainer";
 
 const getTaskById = async (id) => {
   try {
@@ -25,7 +26,9 @@ export default async function EditTask({ params }) {
 
   return (
     <>
-      <EditTaskForm id={id} title={title} description={description} />
+      <MainContainer>
+        <EditTaskForm id={id} title={title} description={description} />
+      </MainContainer>
     </>
   );
 }

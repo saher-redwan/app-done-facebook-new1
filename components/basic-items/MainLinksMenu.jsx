@@ -1,5 +1,6 @@
 "use client";
 
+import style_links from "./moduleStyles/style.module.css";
 // import Link from "next/link";
 import Link from "./Link";
 import { signOut } from "next-auth/react";
@@ -30,6 +31,7 @@ export default function MainLinksMenu({
     >
       <div className="flex flex-col gap-1 mt-6">
         {links?.map((link, index) => {
+          // case no user
           if (!user?._id) {
             if (
               link.link.startsWith("/profile") ||
@@ -46,7 +48,10 @@ export default function MainLinksMenu({
                 />
               );
             }
-          } else {
+          }
+
+          // case with user
+          else {
             return (
               <LinkItem
                 key={index}
@@ -61,10 +66,19 @@ export default function MainLinksMenu({
   );
 }
 
-const classOfActive =
-  "flex items-center gap-1.5 hover:bg-[var(--so-light-color)] py-1 rounded-[0px_var(--border-radius)_var(--border-radius)_0px]";
+const classText =
+  "flex items-center gap-1.5 hover:bg-[var(--so-light-color)] py-1 rounded-[0px_var(--border-radius)_var(--border-radius)_0px] px-2";
 
 function LinkItem({ link, toggleOpenSheet }) {
+  const content = (
+    <>
+      <span style={link?.style}>
+        <link.icon width="2.25rem" height="2.25rem" />
+      </span>
+      <span>{link.text}</span>
+    </>
+  );
+
   // this for button such as login button.
   if (link.link == "?loggedOut") {
     return (
@@ -72,19 +86,15 @@ function LinkItem({ link, toggleOpenSheet }) {
         type="button"
         href={link.link}
         key={Math.random()}
-        className={`${link.active ? "active-link" : ""} ${classOfActive}`}
+        className={`${link.active ? "active-link" : ""} ${classText}`}
         onClick={() => link.text == "logOut" && signOut()}
       >
-        {/* <img
-          src={link.icon}
-          alt=""
-          className={`w-[2.25rem] h-[2.25rem] ${link?.imgStyle}`}
-        /> */}
-        <link.icon width="2.25rem" height="2.25rem" />
-        <span>{link.text}</span>
+        {content}
       </button>
     );
   }
+
+  // these for links
   return (
     <div onClick={toggleOpenSheet}>
       {/* <div>
@@ -93,16 +103,12 @@ function LinkItem({ link, toggleOpenSheet }) {
       <Link
         href={link.link}
         key={Math.random()}
-        className={`${link.active ? "active-link" : ""} ${classOfActive}`}
+        className={`${link.active ? "active-link" : ""} ${
+          link?.hoverSvgEffect ? style_links.hoverEffect_Add : ""
+        } ${classText}`}
         onClick={() => link.text == "logOut" && signOut()}
       >
-        {/* <img
-          src={link.icon}
-          alt=""
-          className={`w-[2.25rem] h-[2.25rem] ${link?.imgStyle}`}
-        /> */}
-        <link.icon width="2.25rem" height="2.25rem" />
-        <span>{link.text}</span>
+        {content}
       </Link>
     </div>
   );

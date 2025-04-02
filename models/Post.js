@@ -25,7 +25,7 @@ const postSchema = new Schema(
       // required: [true, "please enter task description"],
       required: [
         function () {
-          return !this.title && !this.description;
+          return !this.title && !this.image;
         },
         "please enter task description",
       ],

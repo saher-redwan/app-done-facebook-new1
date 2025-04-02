@@ -12,6 +12,10 @@ export default withAuth(
     ) {
       return NextResponse.rewrite(new URL("/denied", req.url));
     }
+
+    if (req.nextUrl.pathname.startsWith("/settings")) {
+      return NextResponse.rewrite(new URL("/not-supported-yet", req.url));
+    }
   },
   {
     callbacks: {
@@ -26,5 +30,6 @@ export const config = {
     "/addPost",
     // this below for nested pages (here for id page inside profile page - /profile/123456 ...)
     "/profile/:path*",
+    "/settings",
   ],
 };

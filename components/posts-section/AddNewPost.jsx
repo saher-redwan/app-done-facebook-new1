@@ -44,12 +44,12 @@ const AddNewPost = ({ posts, setPosts }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title && !description && !imgUrl) {
+    if (!title && !description && !imgSelected) {
       setErrMessage("You have to fill out one input at least!");
       return;
     }
     {
-      setErrMessage("");
+      setErrMessage(false);
     }
 
     setLoadingSubmit(true);
@@ -155,10 +155,10 @@ const AddNewPost = ({ posts, setPosts }) => {
   }, [uploadingImg]);
 
   useEffect(() => {
-    if (title != "" || description != "" || imgUrl != "") {
-      setErrMessage("");
+    if (title != "" || description != "" || imgSelected != "") {
+      setErrMessage(false);
     }
-  }, [title, description, imgUrl]);
+  }, [title, description, imgSelected]);
 
   // useEffect(() => {
   //   setTimeout(() => {

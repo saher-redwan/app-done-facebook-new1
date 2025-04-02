@@ -18,7 +18,6 @@ export default function EditSvg({ ...props }) {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          
         />
       </g>
     </svg>

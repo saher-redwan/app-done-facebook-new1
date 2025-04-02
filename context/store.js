@@ -9,6 +9,7 @@ import AddPostSvg from "@/components/svgs/AddPostSvg";
 import HomeSvg from "@/components/svgs/HomeSvg";
 import ProfileSvg from "@/components/svgs/ProfileSvg";
 import LogoutSvg from "@/components/svgs/LogoutSvg";
+import GameSvg from "@/components/svgs/GameSvg";
 
 const GlobalContext = createContext();
 
@@ -42,7 +43,10 @@ export const GlobalContextProvider = ({ children }) => {
       text: "create post",
       // icon: "/images/basic/add-circle.svg",
       icon: AddPostSvg,
-      imgStyle: "grayscale-[0.4] scale-[0.95]",
+      // imgStyle: "grayscale-[0.4] scale-[0.95]",
+      style: { scale: "0.9" },
+      // groupHover: 'group-hover:transform group-hover:skew-y-[20deg] group-hover:skew-x-[-10deg] group-hover:rotate-3d-[1,1,1,35deg] group-hover:rotate-[50deg]',
+      hoverSvgEffect: true,
       active: false,
     },
     {
@@ -50,7 +54,17 @@ export const GlobalContextProvider = ({ children }) => {
       text: "profile",
       // icon: "/images/basic/profile.svg",
       icon: ProfileSvg,
-      imgStyle: "scale-[0.9]",
+      // imgStyle: "scale-[0.9]",
+      style: { scale: "0.9" },
+      active: false,
+    },
+    {
+      link: `/game`,
+      text: "Game",
+      // icon: "/images/basic/profile.svg",
+      icon: GameSvg,
+      // imgStyle: "scale-[0.8]",
+      style: { scale: "0.8" },
       active: false,
     },
     {
@@ -60,7 +74,7 @@ export const GlobalContextProvider = ({ children }) => {
       active: false,
     },
     {
-      link: "",
+      link: "/settings",
       text: "settings",
       icon: HomeSvg,
       active: false,

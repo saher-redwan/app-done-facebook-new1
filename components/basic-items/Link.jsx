@@ -10,8 +10,8 @@ export default function Link({
   children,
   onClick = () => null,
   className,
-  style,
   href = "/",
+  style,
 }) {
   const { setLoadingOfPreparingFiles } = useGlobalContext();
 

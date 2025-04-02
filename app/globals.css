@@ -40,9 +40,11 @@
     --so-light-color: #f1f5f9;
     --dark-color: #003459;
     --black-color: #00171f;
+    --navy-blue: #374151;
     --gray-color: #999;
     --success-color: #21837b;
     --danger-color: #ef233c;
+    --dark-red: #6d1124;
     --text-color: #000;
     --background-color: #fff;
     --background-color-2: #f9f9f9;
@@ -113,6 +115,7 @@ body,
   --so-light-color: #1b1b1b;
   --dark-color: #003459;
   --black-color: #00171f;
+  --navy-blue: #8895ab;
   --gray-color: #999;
   --success-color: #21837b;
   --danger-color: #ef233c;
@@ -161,6 +164,9 @@ body,
   .basic-input {
     @apply border-[var(--input-border-color)] border-[var(--input-border-color)] outline-[0px] py-2 px-3 rounded-[7px] focus:outline outline-2 outline-[#999] bg-[var(--background-color-2)];
   }
+  .title {
+    @apply text-xl;
+  }
 }
 
 body {
@@ -169,7 +175,33 @@ body {
 
 /* ******************** */
 /* ******************** */
+.fireworksDiv {
+  position: relative;
+  background-color: rgba(0, 0, 0, 1);
+  width: 100%;
+  height: 100vh;
+  z-index: 9;
+}
 
+.text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.text h5 {
+  text-align: center;
+  font-size: 3rem;
+  color: white;
+  text-transform: uppercase;
+  text-shadow: 3px -4px 4px red;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -225,6 +257,15 @@ textarea {
   &::placeholder {
     text-transform: capitalize;
   }
+}
+
+a {
+  display: inline-block;
+}
+
+.link {
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--border-radius);
 }
 
 /* for Modal */
@@ -463,6 +504,18 @@ textarea {
     scale: 0.9;
   }
 }
+@keyframes congrats {
+  0% {
+    opacity: 0.5;
+    scale: 0.2;
+    rotate: 20deg;
+  }
+  20% {
+    opacity: 1;
+  }
+}
+
+/* end animation */
 
 button.like-btn {
   position: relative;
@@ -595,5 +648,157 @@ button.like-btn {
     transform-origin: top;
     opacity: 0;
     overflow: hidden;
+  }
+}
+
+/* Game style */
+.game-style {
+  .title {
+    font-family: "Luckiest Guy", cursive;
+    font-size: 3.5rem;
+    color: #fff;
+    text-shadow: 0 2px 0 #4da6ff, 0 4px 0 #0066cc, 0 6px 0 #003366,
+      0 8px 10px rgba(0, 51, 102, 0.3);
+    text-align: center;
+    margin: 30px 0;
+    letter-spacing: 2px;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    position: relative;
+    animation: titleFloat 3s ease-in-out infinite alternate;
+    line-height: 100%;
+    margin-bottom: 3.5rem;
+    transition: 2.85s;
+
+    &:hover {
+      transition: 0.185s;
+      text-shadow: 0 2px 0 #ff8a00, 0 4px 0 #ff5500, 0 6px 0 #ff3000,
+        0 8px 20px rgba(255, 100, 0, 0.6), 0 0 30px rgba(255, 200, 0, 0.8);
+      transform: scale(1.025);
+    }
+
+    &::before {
+      content: attr(data-text);
+      position: absolute;
+      color: rgba(255, 255, 255, 0.1);
+      top: 5px;
+      left: 0;
+      width: 100%;
+      transform: translateZ(-20px);
+      z-index: -1;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 80%;
+      height: 10px;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(255, 165, 0, 0.8) 0%,
+        rgba(255, 165, 0, 0) 70%
+      );
+      bottom: -15px;
+      left: 10%;
+      filter: blur(5px);
+    }
+  }
+
+  .game-board {
+    /* perspective: 1000px; */
+    /* margin-bottom: -15px; */
+
+    .card {
+      user-select: none;
+      aspect-ratio: 1/1;
+      padding: 10px;
+      box-sizing: border-box;
+      text-align: center;
+      transition: 0.6s;
+      transform-style: preserve-3d;
+      position: relative;
+      > div {
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        transition: 0.6s;
+        background: var(--border-light-color);
+      }
+      .back {
+        font-size: 50px;
+        line-height: 120px;
+        font-family: monospace, system-ui;
+        cursor: pointer;
+        /* color: darken(#ee6910, 30%); */
+        color: var(--success-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .front {
+        transform: rotateY(180deg);
+        line-height: 110px;
+        text-emphasis: none;
+        img {
+          width: 100%;
+          aspect-ratio: 1 / 1;
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: cover;
+        }
+      }
+      &.flipped {
+        transform: rotateY(180deg);
+      }
+      &.matched {
+        transform: rotateY(180deg);
+        .front {
+          box-shadow: 0 0 0 2px rgba(#000, 0.05) inset;
+          animation: selected 0.8s 0s ease 1;
+          animation-fill-mode: both;
+          /* opacity: 0.8; */
+        }
+      }
+    }
+  }
+
+  .restart-button {
+    width: 12em;
+    height: 3em;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    font-size: 12px;
+    background-color: #6d1124;
+    border: 0;
+  }
+
+  /* .centered {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  } */
+}
+@keyframes selected {
+  0% {
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.2;
+    scale: 1;
+  }
+  100% {
+    opacity: 0.65;
+    scale: 0.9;
   }
 }

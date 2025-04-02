@@ -35,7 +35,7 @@ export default function EditTaskForm({ id, title, description }) {
   };
 
   return (
-    <div className=" max-w-[600px] mx-auto mt-10 px-4">
+    <div className="mt-10 px-4">
       <h1>Update post</h1>
       <form onSubmit={handleSubmit} className="mt-3 flex flex-col gap-3">
         <input
