@@ -726,6 +726,7 @@ button.like-btn {
       }
       &.flipped {
         transform: rotateY(180deg);
+        /* to fix bug when after deploy */
         animation: unset;
       }
       &.matched {
