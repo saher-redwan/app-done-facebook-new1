@@ -1,28 +1,12 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { cardImageLinks_Game as cards } from "@/lib/utils";
 import Card from "./Card";
 import GameOver from "./GameOver";
 import confetti from "canvas-confetti";
 
 export default function MainGame() {
-  const cards = [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1zwhySGCEBxRRFYIcQgvOLOpRGqrT3d7Qng&s",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1zwhySGCEBxRRFYIcQgvOLOpRGqrT3d7Qng&s",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2XEWvyObeMa70CJxSbM-Uku9WoNMGF0wxprkupywonkBr7UylJTLiDczs_V2sg3L6idQ&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2XEWvyObeMa70CJxSbM-Uku9WoNMGF0wxprkupywonkBr7UylJTLiDczs_V2sg3L6idQ&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJrT7MI9fsrc6mWRBJBwhrf4vwTL7S5B8CzQ&s",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJrT7MI9fsrc6mWRBJBwhrf4vwTL7S5B8CzQ&s",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmpOSNsm5z0BZ0Wn519jqePktwii0qVWkaKAc2nOmWtpJ59U7fEkezov7llecZNwh4aeI&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmpOSNsm5z0BZ0Wn519jqePktwii0qVWkaKAc2nOmWtpJ59U7fEkezov7llecZNwh4aeI&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJxo2NFiYcR35GzCk5T3nxA7rGlSsXvIfJwg&s",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJxo2NFiYcR35GzCk5T3nxA7rGlSsXvIfJwg&s",
-    "https://global.discourse-cdn.com/twitter/original/2X/9/9863c5060f0bb427b301719db4d0cc5c5a5f0e68.JPG",
-    "https://global.discourse-cdn.com/twitter/original/2X/9/9863c5060f0bb427b301719db4d0cc5c5a5f0e68.JPG",
-  ];
-
-  ///////////// HELPER FUNCTION /////////////
-
   const shuffle = (array) => {
     let currentIndex = array.length,
       temporaryValue,
@@ -220,7 +204,8 @@ export default function MainGame() {
       {/* to load the audio on mount the page, so we can somthly play it with the game effects */}
       <audio
         src="/sounds/winning-tone_bfK5hxxG321.wav"
-        autoPlay={true}
+        autoPlay
+        preload="auto"
         muted={isMuted}
         ref={soundRef}
       />
