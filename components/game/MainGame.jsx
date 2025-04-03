@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Card from "./Card";
 import GameOver from "./GameOver";
 import confetti from "canvas-confetti";
-import winningTone from "@/public/sounds/winning-tone.wav";
 
 export default function MainGame() {
   const cards = [
@@ -138,7 +137,7 @@ export default function MainGame() {
   };
 
   ///////////// Confetti Effect and sound /////////////
-  function startConfetti() {
+  function startConfettiEffects() {
     const colors = ["#bb0000", "#ffffff"];
 
     let time = 1;
@@ -165,13 +164,19 @@ export default function MainGame() {
     }, 15);
   }
 
+  const soundRef = useRef();
+
+  // this for load the audio at the beginning of the page
+  const [isMuted, setIsMuted] = useState(true);
+
   function playSound() {
-    new Audio(winningTone).play();
+    setIsMuted(false);
+    soundRef.current.play();
   }
 
   useEffect(() => {
     if (gameOver) {
-      startConfetti();
+      startConfettiEffects();
       playSound();
     }
   }, [gameOver]);
@@ -187,7 +192,7 @@ export default function MainGame() {
         </h1>
       </div>
 
-      {/* content */}
+      {/* cards */}
       {!gameOver && (
         <div
           className="game-board grid grid-cols-3 md:grid-cols-4  gap-3 mt-7"
@@ -207,7 +212,17 @@ export default function MainGame() {
           ))}
         </div>
       )}
+
+      {/* gameOver */}
       {gameOver && <GameOver restartGame={restartGame} />}
+
+      {/* to load the audio on mount the page, so we can somthly play it with the game effects */}
+      <audio
+        src="/sounds/winning-tone.wav"
+        autoPlay={true}
+        muted={isMuted}
+        ref={soundRef}
+      />
     </div>
   );
 }
