@@ -167,6 +167,7 @@ export default function MainGame() {
   const soundRef = useRef();
 
   // this for load the audio at the beginning of the page
+  // This step (isMuted) solves the problem of rigidity in the element.
   const [isMuted, setIsMuted] = useState(true);
 
   function playSound() {
@@ -218,7 +219,7 @@ export default function MainGame() {
 
       {/* to load the audio on mount the page, so we can somthly play it with the game effects */}
       <audio
-        src="/sounds/winning-tone.wav"
+        src="/sounds/winning-tone_bfK5hxxG321.wav"
         autoPlay={true}
         muted={isMuted}
         ref={soundRef}
