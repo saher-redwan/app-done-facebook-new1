@@ -241,6 +241,22 @@ a {
   border-radius: var(--border-radius);
 }
 
+/********* for fonts ***************/
+html {
+  /* due to Comfortaa font (usually 16px)  */
+  /* the only issue is there's no very bold weight, so to fix this we can another font witch is here ()  */
+  font-size: 15px;
+  font-family: "Comfortaa", Arial, Helvetica, sans-serif;
+}
+
+.--second-font--bold {
+  font-family: "Libre Franklin", Arial, Helvetica, sans-serif;
+}
+
+.--arabic-font {
+  font-family: "Tajawal", Arial, Helvetica, sans-serif;
+}
+
 /* for Modal */
 .custom-modal {
   position: fixed;

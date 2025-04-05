@@ -1,11 +1,8 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar-section/Navbar";
 import AuthProvider from "@/lib/AuthProvider";
 import { GlobalContextProvider } from "@/context/store";
 import LoadingEquipment from "@/components/basic-items/LoadingEquipment";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -18,9 +15,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        {/* 3 fonts: Comfortaa, Libre Franklin, Tajawal (for Arabic)*/}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+
+      {/* App */}
       <AuthProvider>
         <GlobalContextProvider>
-          <body className={`${inter.className} XXdark-theme`}>
+          <body className={` XXdark-theme`}>
             <Navbar />
             <div>{children}</div>
             <LoadingEquipment />
