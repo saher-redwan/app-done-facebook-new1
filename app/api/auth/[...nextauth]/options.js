@@ -4,6 +4,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/models/User";
 import bcrypt from "bcrypt";
 
+// import manEmptyAvatar from "@/public/images/manEmptyAvatar.avif";
+
 import { custom } from "openid-client";
 // this for slow internet, next-auth sent error, it's by default 3500ms
 custom.setHttpOptionsDefaults({
@@ -11,6 +13,9 @@ custom.setHttpOptionsDefaults({
   timeout: 10000,
   timeout: 30000,
 });
+
+const manEmptyAvatar =
+  "https://img.freepik.com/premium-vector/man-empty-avatar-casual-business-style-vector-photo-placeholder-social-networks-resumes_885953-434.jpg?w=826";
 
 export const options = {
   providers: [
@@ -45,7 +50,7 @@ export const options = {
         // },
       },
       async authorize(credentials) {
-        // console.log("credentials:::", credentials);
+        console.log("credentials:::", credentials);
         try {
           const foundUser = await User.findOne({ email: credentials.email })
             .lean()
@@ -80,6 +85,9 @@ export const options = {
       //   token.name = user.name;
       // }
       if (trigger === "update") {
+        console.log("token::", token);
+        console.log("session::", session);
+
         return { ...token, ...session.user };
       }
       // console.log("token token", token);
@@ -94,8 +102,10 @@ export const options = {
         if (!token?._id) {
           token._id = infoFromDB._id;
         }
-        if (!token?.image) {
+        if (token?.image) {
           token.image = infoFromDB.image;
+        } else {
+          token.image = manEmptyAvatar;
         }
         // console.log("within infoFromDB... XXX");
       }
@@ -110,7 +120,12 @@ export const options = {
       }
 
       session.user._id = token._id;
-      session.user.image = token.image;
+
+      if (session?.user?.image) {
+        session.user.image = token.image;
+      } else {
+        session.user.image = manEmptyAvatar;
+      }
 
       // // console.log("session::::  :::::  :::::", session);
       return session;

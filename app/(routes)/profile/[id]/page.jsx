@@ -16,6 +16,7 @@ import { useEffect, useRef, useState } from "react";
 import MainContainer from "@/components/basic-items/MainContainer";
 import { zeroingTheLength } from "@/lib/utils";
 import EditUserInfo from "@/components/profile/EditUserInfo";
+import EditSvg from "@/components/svgs/EditSvg";
 
 export default function Profile() {
   // this with searchParams (?id=111)...
@@ -94,9 +95,10 @@ export default function Profile() {
 
               <Button
                 onClick={() => setOpenUpdateDateForm((prev) => !prev)}
-                className="my-3 bg-[var(--dark-color)]"
+                className="custom-background my-3 bg-[var(--dark-color)] flex items-end"
               >
-                edit your information
+                <EditSvg className="w-[22px] invert-[0.9]" />
+                <span>edit your information</span>
               </Button>
             </>
           ) : (

@@ -114,10 +114,16 @@ function LinkItem({ link, toggleOpenSheet }) {
       <Link
         href={link.link}
         key={Math.random()}
+        typeOfElement={link.typeOfElement}
         className={`${link.active ? "active-link" : ""} ${
           link?.hoverSvgEffect ? chechTextOfLinks(link) : ""
         } ${classText}`}
-        onClick={() => link.text == "logOut" && signOut()}
+        onClick={() =>
+          link.text == "logOut"
+            ? signOut()
+            : link.text == "Dark Mood" &&
+              document.body.classList.toggle("dark-theme")
+        }
       >
         {content}
       </Link>

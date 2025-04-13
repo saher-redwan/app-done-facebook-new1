@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import Button from "../basic-items/Button";
 import EditComment from "./EditComment";
 import DeleteComment from "./DeleteComment";
+import DotsSvg from "../svgs/DotsSvg";
 
 export default function CommentPopover({
   text,
@@ -43,11 +44,12 @@ export default function CommentPopover({
       >
         <PopoverTrigger>
           <div>
-            <img
+            <DotsSvg className="w-[1.7rem] h-[1.65rem]" />
+            {/* <img
               src="/images/basic/dots.svg"
               alt=""
               className="w-[1.7rem] h-[1.65rem] object-cover"
-            />
+            /> */}
           </div>
         </PopoverTrigger>
         <PopoverContent>

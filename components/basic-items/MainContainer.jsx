@@ -24,7 +24,7 @@ export default function MainContainer({ children }) {
                 <img
                   src="https://m.media-amazon.com/images/I/A1-LgsoZS0L.png"
                   alt=""
-                  className="w-full h-[9.5rem]"
+                  className="w-full h-auto aspect-video object-cover"
                 />
 
                 <p className="text-[0.8775rem] mt-2">

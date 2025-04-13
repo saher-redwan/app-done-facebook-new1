@@ -16,7 +16,7 @@ export default function LoadingEquipment() {
 
   return (
     <>
-      {/* {!isloadedSession && (
+      {!isloadedSession && (
         <div>
           <div className="z-[100] fixed top-0 left-0 w-[100vw] h-[100vh] backdrop-blur-[6.5px] bg-[#ffffff20] flex justify-center items-center">
             <div className="relative flex justify-center items-center">
@@ -25,7 +25,7 @@ export default function LoadingEquipment() {
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </>
   );
 }

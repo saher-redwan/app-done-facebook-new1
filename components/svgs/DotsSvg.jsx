@@ -8,8 +8,8 @@ export default function DotsSvg({ ...props }) {
       height="800px"
       viewBox="-0.5 0 25 25"
       fill="none"
-      className="need-invert"
       {...props}
+      className={`need-invert ${props.className}`}
     >
       <path
         {...props}

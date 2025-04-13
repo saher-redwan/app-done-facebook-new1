@@ -17,7 +17,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
         {/* 3 fonts: Comfortaa, Libre Franklin, Tajawal (for Arabic)*/}
         <link
           href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
@@ -28,7 +32,7 @@ export default function RootLayout({ children }) {
       {/* App */}
       <AuthProvider>
         <GlobalContextProvider>
-          <body className={` XXdark-theme`}>
+          <body className={` dark-theme`}>
             <Navbar />
             <div>{children}</div>
             <LoadingEquipment />

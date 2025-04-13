@@ -108,7 +108,7 @@ export default function SingleComment({
             <div className="flex gap-3">
               <Link
                 href={`/profile/${comment.user?._id}`}
-                className="flex gap-2 w-fit"
+                className="flex gap-2 w-fit items-center"
               >
                 <div>
                   <img
@@ -164,7 +164,7 @@ export default function SingleComment({
               )}
             </div>
           </div>
-          <div className="text-left">
+          <div className="text-left mt-0.5">
             <p>{text}</p>
           </div>
         </div>

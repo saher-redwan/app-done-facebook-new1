@@ -3,6 +3,7 @@ import React from "react";
 export default function SettingsSvg({ ...props }) {
   return (
     <svg
+      className="need-invert"
       width="24px"
       height="24px"
       viewBox="0 0 24 24"

@@ -16,12 +16,12 @@ export default function EditUserInfo({
   setOpenUpdateDateForm,
 }) {
   // for image upload.
-  const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [uploadingImg, setUploadingImg] = useState("not-start");
   const [imgSelected, setImgSelected] = useState("");
   const [error_img, setError_img] = useState();
   // end image upload.
+  const [loadingForm, setLoadingForm] = useState(false);
 
   const { user } = useGlobalContext();
   const route = useRouter();
@@ -36,18 +36,31 @@ export default function EditUserInfo({
 
   async function handleChangeData(e) {
     e.preventDefault();
+
     if (user._id != userId) {
       alert("that is not your ID!. Please, Don't Do that");
       return;
     }
 
-    setLoadingSubmit(true);
+    setLoadingForm(true);
 
     // here will post without img, otherwise will post with img using useEffect below...
     if (!imgSelected) {
       await updateUserOperation();
     }
   }
+
+  useEffect(() => {
+    (async () => {
+      if (uploadingImg == "complete" && imgSelected) {
+        await updateUserOperation(imgSelected);
+      }
+    })();
+  }, [uploadingImg]);
+
+  useEffect(() => {
+    console.log("uploadingImg::::", uploadingImg);
+  }, [uploadingImg]);
 
   // for image upload
   async function updateUserOperation() {
@@ -66,13 +79,6 @@ export default function EditUserInfo({
       window.location = "/";
     });
   }
-
-  useEffect(() => {
-    // post if there is img
-    if (imgSelected && uploadingImg == "complete" && !error_img) {
-      updateUserOperation(imgSelected);
-    }
-  }, [uploadingImg]);
 
   // for animations
   const editFormItem = useRef();
@@ -100,11 +106,10 @@ export default function EditUserInfo({
 
   useEffect(() => {
     setStyle(valueOfAnimaiton);
-    // }, [loadingStuffForUser]);
   }, [loadingStuffForUser, openUpdateDateForm, imgSelected]);
 
   useEffect(() => {
-    // for reset height of form ele
+    // for reset height of form ele (for animations)
     setOpenUpdateDateForm((prev) => !prev);
     setTimeout(() => {
       setOpenUpdateDateForm((prev) => !prev);
@@ -113,7 +118,6 @@ export default function EditUserInfo({
 
   const fatherItem = useRef();
   // end animaitons
-  
 
   return (
     <div ref={fatherItem} style={{ transitionDuration: "0.5s" }}>
@@ -136,9 +140,12 @@ export default function EditUserInfo({
           ref={editFormItem}
           onSubmit={handleChangeData}
           className="flex flex-col gap-1 mb-5 p-3"
-          style={{ borderBottom: "2px solid #ddd" }}
+          style={{
+            borderBottom: "2px solid var(--border-light-color)",
+            borderRadius: "8px",
+          }}
         >
-          <div className={`${loadingSubmit ? "disabled-all" : ""}`}>
+          <div className={`${loadingForm ? "disabled-all" : ""}`}>
             <label className="flex gap-1 flex-col max-w-[300px]">
               <span>Enter Name:</span>
               <input
@@ -150,34 +157,39 @@ export default function EditUserInfo({
               />
             </label>
 
-            <div className="mt-2">
+            <div className="mt-4">
               <div className="flex flex-col">
                 <span className="-mb-1.5">change image:</span>
-                <UploadButtonItem
-                  setImgUrl={setImgUrl}
-                  loadingSubmit={loadingSubmit}
-                  setLoadingSubmit={setLoadingSubmit}
-                  uploadingImg={uploadingImg}
-                  setUploadingImg={setUploadingImg}
-                  imgSelected={imgSelected}
-                  setImgSelected={setImgSelected}
-                  error_img={error_img}
-                  setError_img={setError_img}
-                />
+                <div>
+                  <UploadButtonItem
+                    setImgUrl={setImgUrl}
+                    loadingForm={loadingForm}
+                    setLoadingForm={setLoadingForm}
+                    uploadingImg={uploadingImg}
+                    setUploadingImg={setUploadingImg}
+                    imgSelected={imgSelected}
+                    setImgSelected={setImgSelected}
+                    error_img={error_img}
+                    setError_img={setError_img}
+                    fatherItem={fatherItem.current}
+                  />
+                </div>
               </div>
             </div>
           </div>
-          <div className="flex gap-2 mt-2">
+          <div className="flex gap-2 mt-5">
             <Button
-              type="button"
+              styleOfButton="outline"
               onClick={() => route.push("/")}
-              className="bg-transparent border border-[2px] border-[#ccc] text-[#333]"
+              className="bg-transparent border border-[1px] border-[var(--border-light-color)] text-[var(--text-color)]"
             >
               Back Home
             </Button>
             <Button
-              className="bg-[var(--success-color)] border-[2px] border-[var(--success-color)]"
-              loading={loadingSubmit}
+              onClick={handleChangeData}
+              styleOfButton="success"
+              loading={loadingForm}
+              disabled={!imgSelected && !newName}
             >
               Update User Data
             </Button>

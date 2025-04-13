@@ -86,8 +86,7 @@ export default function DeleteComment({
           <Button
             onClick={handleDelete}
             loading={loading}
-            // like danger
-            variant="destructive"
+            styleOfButton="danger"
           >
             Delete
           </Button>

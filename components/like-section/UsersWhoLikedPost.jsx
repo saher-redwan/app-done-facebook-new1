@@ -3,6 +3,7 @@ import Modal from "../basic-items/Modal";
 import fetchData from "../custom-hooks/fetchData";
 import Link from "../basic-items/Link";
 import LoadingSpinner from "../basic-items/LoadingSpinner";
+import LikeSvg from "../svgs/LikeSvg";
 
 export default function UsersWhoLikedPost({ _id_post, countOfLikes }) {
   const [open, setOpen] = useState();
@@ -38,7 +39,10 @@ export default function UsersWhoLikedPost({ _id_post, countOfLikes }) {
       return usersWholikeThisPost.map((user) => (
         <div key={user?._id} className="mb-[1rem]">
           <div>
-            <Link href={`/profile/${user?._id}`} className="flex gap-2 w-fit">
+            <Link
+              href={`/profile/${user?._id}`}
+              className="flex gap-2 w-fit items-center"
+            >
               <div>
                 <img
                   src={user?.image}
@@ -56,7 +60,14 @@ export default function UsersWhoLikedPost({ _id_post, countOfLikes }) {
 
   return (
     <>
-      <button onClick={getUsersWhoLikePost}>{countOfLikes || "0"} likes</button>
+      <button
+        onClick={getUsersWhoLikePost}
+        className="flex items-center gap-[2px] hover:bg-[var(--background-color-2)] rounded-md"
+      >
+        <span className="">{countOfLikes || "0"}</span>
+        <LikeSvg className="w-[26px] h-[26px] *:fill-[#161616]" />
+      </button>
+
       <Modal open={open} toggleModal={toggleModal}>
         <div className="">
           <h2 className="text-[1.35rem] mb-4">Users Who Liked This Post</h2>

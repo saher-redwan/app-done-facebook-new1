@@ -12,6 +12,7 @@ export default function Link({
   className,
   href = "/",
   style,
+  typeOfElement,
 }) {
   const { setLoadingOfPreparingFiles } = useGlobalContext();
 
@@ -20,11 +21,15 @@ export default function Link({
   return (
     <NextLink
       href={href}
+      // link or button
+      typeOfElement=""
       onClick={() => {
         href !== "" &&
           !pathname.toLowerCase().includes(href.toLowerCase()) &&
           (() => {
-            setLoadingOfPreparingFiles(true);
+            if (typeOfElement != "button") {
+              setLoadingOfPreparingFiles(true);
+            }
             onClick();
           })();
       }}

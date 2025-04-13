@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Modal from "../basic-items/Modal";
 import { useRouter } from "next/navigation";
 import Button from "@/components/basic-items/Button";
@@ -27,19 +27,22 @@ const AddNewPost = ({ posts, setPosts }) => {
 
   const { user } = useGlobalContext();
 
+console.log("here user::: ," , user);
+
+
   const route = useRouter();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   // for image upload.
-  const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [uploadingImg, setUploadingImg] = useState("not-start");
   const [imgSelected, setImgSelected] = useState("");
   const [error_img, setError_img] = useState();
   const [errMessage, setErrMessage] = useState("");
   // end image upload.
+  const [loadingForm, setLoadingForm] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +55,7 @@ const AddNewPost = ({ posts, setPosts }) => {
       setErrMessage(false);
     }
 
-    setLoadingSubmit(true);
+    setLoadingForm(true);
 
     // here will post without img, otherwise will post with img using useEffect below...
     if (!imgSelected) {
@@ -119,15 +122,11 @@ const AddNewPost = ({ posts, setPosts }) => {
       `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/posts`,
       postData()
     );
-    // // console.log("data_fetch:::", data_fetch);
 
     if (data_fetch) {
-      // console.log("data_fetch", data_fetch);
-
       setTimeout(() => {
         toggleModal();
-        setLoadingSubmit(false);
-        setLoadingSubmit(false);
+        setLoadingForm(false);
         setImgSelected("");
         setPosts((prev) => [{ ...data_fetch.post, addedOne: true }, ...prev]);
         // reset values
@@ -138,18 +137,14 @@ const AddNewPost = ({ posts, setPosts }) => {
       }, 1400);
     } else {
       // console.log("Error in server..., sorry");
-      // alert("Wrong...");
-      // setError("root", {
-      //   // for ex: (this usually for data comes from server)
-      //   // message: "This email is already taken",
-      //   message: "Error in server..., sorry",
-      // });
     }
   }
 
   useEffect(() => {
     // post if there is img
     if (imgSelected && uploadingImg == "complete" && !error_img) {
+      console.log("we find imgSelected");
+
       postOperation(imgSelected);
     }
   }, [uploadingImg]);
@@ -160,21 +155,21 @@ const AddNewPost = ({ posts, setPosts }) => {
     }
   }, [title, description, imgSelected]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setSss(true);
-  //   }, 6000);
-  // }, []);
+  function handleChangeTitle(e) {
+    const value = e.target.value;
+    if (value.length > 10) {
+      setTitle((prev) => prev);
+      setErrMessage("It is not allowed to exceed 250 characters.");
+    } else {
+      setTitle(value);
+      setErrMessage("");
+    }
+  }
 
-  // useEffect(() => {
-  //   if (!isSubmitting && !startAddingPost && imgUrl) {
-  //     toggleModal();
-  //     reset();
-  //   }
-  // }, [isSubmitting, startAddingPost]);
+  const fatherItem = useRef();
 
   return (
-    <div className="flex justify-center">
+    <div ref={fatherItem} className="flex justify-center">
       <Button
         className="font-[500] py-[0.5rem] min-w-[220px] custom-background"
         onClick={() => toggleModal()}
@@ -190,17 +185,17 @@ const AddNewPost = ({ posts, setPosts }) => {
       </Button>
 
       {/* Modal */}
-      <Modal open={openModal} toggleModal={toggleModal} loading={loadingSubmit}>
-        <form onSubmit={onSubmit} className="flex flex-col *:w-full">
+      <Modal open={openModal} toggleModal={toggleModal} loading={loadingForm}>
+        <form className="flex flex-col *:w-full">
           <div className="italic uppercase ">
             Hi, {user?.name || user?.email}
           </div>
 
-          <div className={`${loadingSubmit && "disabled-all"} mt-4`}>
+          <div className={`${loadingForm && "disabled-all"} mt-4`}>
             <div className="*:w-full flex flex-col gap-2">
               <input
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => handleChangeTitle(e)}
                 className="basic-input"
                 type="text"
                 placeholder="Task Title"
@@ -217,14 +212,15 @@ const AddNewPost = ({ posts, setPosts }) => {
 
             <UploadButtonItem
               setImgUrl={setImgUrl}
-              loadingSubmit={loadingSubmit}
-              setLoadingSubmit={setLoadingSubmit}
+              loadingForm={loadingForm}
+              setLoadingForm={setLoadingForm}
               uploadingImg={uploadingImg}
               setUploadingImg={setUploadingImg}
               imgSelected={imgSelected}
               setImgSelected={setImgSelected}
               error_img={error_img}
               setError_img={setError_img}
+              fatherItem={fatherItem.current}
             />
           </div>
 
@@ -238,8 +234,9 @@ const AddNewPost = ({ posts, setPosts }) => {
           )}
 
           <Button
+            onClick={onSubmit}
             className="custom-background"
-            loading={loadingSubmit || uploadingImg == "starting"}
+            loading={loadingForm || uploadingImg == "starting"}
           >
             Add New Post
           </Button>

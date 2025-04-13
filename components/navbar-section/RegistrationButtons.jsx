@@ -4,11 +4,14 @@ import SignOut from "./SignOut";
 import fetchData from "../custom-hooks/fetchData";
 import getUserInfoByEmail from "@/server-actions/getUserInfoByEmail";
 import MenuNavSection from "./MenuNavSection";
+import { manEmptyAvatar } from "@/lib/utils";
 
 // export const dynamic = 'force-dynamic'
 
 export default async function RegistrationButtons() {
   const session = await getServerSession();
+
+  console.log("session", session);
 
   // const userInfo = async () => {
   //   if (session?.user?.email) {
@@ -62,17 +65,16 @@ export default async function RegistrationButtons() {
               }}
             >
               <small className="flex justify-center items-center gap-1">
-                <b className="lines-with-dots">
+                <b className="lines-with-dots -mb-[2.5px]">
                   {userInfo?.name || userInfo?.email}
                 </b>
-                {userInfo?.image && (
-                  <img
-                    // src={userInfo?.image}
-                    src={userInfo?.image}
-                    alt=""
-                    className="w-[28px] h-[28px] select-none pointer-events-none object-cover rounded-[7px]"
-                  />
-                )}
+
+                <img
+                  // src={userInfo?.image}
+                  src={userInfo?.image ? userInfo?.image : manEmptyAvatar}
+                  alt=""
+                  className="w-[28px] h-[28px] select-none pointer-events-none object-cover rounded-[7px]"
+                />
               </small>
             </Link>
           </div>

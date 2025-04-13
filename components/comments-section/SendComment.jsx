@@ -114,7 +114,7 @@ export default function SendComment({
             <b className="text-red-500">{errors.root.message}</b>
           </div>
         )}
-        <Button loading={isSubmitting} className="bg-slate-600 mt-3">
+        <Button loading={isSubmitting} className=" mt-3">
           Add Comment
         </Button>
       </form>

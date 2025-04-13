@@ -71,19 +71,22 @@ export default function EditComment({
     // );
 
     try {
-      const res = await fetch("${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/edit-comment", {
-        cache: "no-store",
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          _id_post,
-          _id_comment,
-          updatedText: currentTextInput,
-          updatedAt: new Date().toJSON(),
-        }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/edit-comment`,
+        {
+          cache: "no-store",
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            _id_post,
+            _id_comment,
+            updatedText: currentTextInput,
+            updatedAt: new Date().toJSON(),
+          }),
+        }
+      );
 
       if (res.ok) {
         let data = await res.json();
@@ -162,7 +165,7 @@ export default function EditComment({
               className="basic-input w-full"
             />
 
-            <DialogFooter className="mt-5">
+            <DialogFooter className="mt-5 font-[600]">
               <button type="submit">Save changes</button>
             </DialogFooter>
           </form>

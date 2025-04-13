@@ -118,7 +118,7 @@ export default function CommentsOfPost({ _id_post, comments_count }) {
       return (
         <div
           ref={listOfComments}
-          className="max-h-[50vh] overflow-auto bg-white relative"
+          className="max-h-[50vh] overflow-auto  relative"
           style={{ animation: "show-height-slowed 2s" }}
         >
           <AnimatePresence>

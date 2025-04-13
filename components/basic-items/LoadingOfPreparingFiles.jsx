@@ -3,6 +3,7 @@
 import { useGlobalContext } from "@/context/store";
 import LoadingSpinner from "./LoadingSpinner";
 import { useEffect, useRef } from "react";
+import { array } from "zod";
 
 export default function LoadingOfPreparingFiles() {
   const { loadingOfPreparingFiles } = useGlobalContext();
@@ -15,7 +16,7 @@ export default function LoadingOfPreparingFiles() {
   return (
     <>
       <div
-        className="fixed top-[4rem] left-[50vw] -translate-x-1/2 backdrop-blur-[1.5px] bg-[#ffffff7c] p-[0.65rem] rounded-[50%] shadow-[0_0_25px_#00000042] select-none"
+        className="fixed top-[4rem] left-[50vw] -translate-x-1/2 backdrop-blur-[1.5px] bg-[var(--background-color-2)] p-[0.65rem] rounded-[50%] shadow-[0_0_25px_#00000042] select-none"
         style={{
           marginTop: loadingOfPreparingFiles ? "0px" : "-50px",
           opacity: loadingOfPreparingFiles ? "1" : "0",
@@ -27,10 +28,16 @@ export default function LoadingOfPreparingFiles() {
         <LoadingSpinner />
       </div>
       {/*  */}
-      <div
-        ref={ref}
-        className={`${loadingOfPreparingFiles ? "disable-click-overlay" : ""}`}
-      ></div>
+      {[...Array(10)].map(() => {
+        return (
+          <div
+            ref={ref}
+            className={`${
+              loadingOfPreparingFiles ? "disable-click-overlay" : "hidden"
+            }`}
+          ></div>
+        );
+      })}
     </>
   );
 }

@@ -61,7 +61,7 @@ export default function LikeSection({
   }
 
   return (
-    <div className="flex items-center gap-3 ml-2">
+    <div className="flex items-center gap-3 md:gap-5 ml-2">
       <button
         onClick={handleLikeButton}
         className={`like-btn ${isLiked ? "liked" : ""} ${

@@ -55,7 +55,7 @@ AlertDialogHeader.displayName = "AlertDialogHeader";
 const AlertDialogFooter = ({ className, ...props }) => (
   <div
     className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 mt-[16px]",
       className
     )}
     {...props}
@@ -98,7 +98,7 @@ const AlertDialogCancel = React.forwardRef(({ className, ...props }, ref) => (
     ref={ref}
     className={cn(
       buttonVariants({ variant: "outline" }),
-      "mt-2 sm:mt-0",
+      "mt-2 sm:mt-0  ------[custom]------  bg-[var(--background-color)] hover:bg-[var(--background-color-2)] !text-[var(--text-color)] !border-[var(--border-light-color)]",
       className
     )}
     {...props}

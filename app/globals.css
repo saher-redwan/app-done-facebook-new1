@@ -156,7 +156,7 @@ body,
 
 @layer components {
   .select-new-file {
-    @apply mt-2 flex flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 text-center;
+    @apply mt-2 flex flex-col items-center justify-center rounded-lg border border-dashed border-[var(--border-light-color)] px-6 py-10 text-center;
   }
   .active-link {
     @apply bg-[var(--so-light-color)] hover:bg-[var(--so-light-color)];
@@ -205,6 +205,10 @@ svg {
   height: unset; */
   width: fit-content;
   height: fit-content;
+}
+
+button {
+  text-transform: capitalize;
 }
 
 @keyframes amin-deleting-item {
@@ -380,8 +384,8 @@ html {
 /* unset some items in uploadThing */
 .my-uploadThing-item-- {
   /* background-color: red; */
-  margin-top: 1.1rem;
-  margin-bottom: 1.8rem;
+  margin-top: 0.65rem;
+  /* margin-bottom: 1.8rem; */
 
   > div > div {
     border-color: #5c5c5c;
@@ -510,13 +514,19 @@ button.like-btn {
   position: relative;
   border: 2px solid var(--primary-color);
   box-shadow: 8px 8px transparent;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+  padding-top: 2.5px;
+  padding-bottom: 2.5px;
 
   &.liked {
     /* border-color: #fff; */
     border: none;
     color: #fff;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 1.8px;
+    padding-bottom: 1.8px;
 
     span {
       opacity: 0;

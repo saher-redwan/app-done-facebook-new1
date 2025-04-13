@@ -45,11 +45,11 @@ export default function SignIn() {
       {isRenderThePage && !session?.user?.email ? (
         <>
           <form onSubmit={signInWithCredentials}>
-            <label>
+            <label className="basic-input flex gap-4">
               Email
               <input name="email" type="email" required ref={emailRef} />
             </label>
-            <label>
+            <label className="basic-input flex gap-4">
               Password
               <input
                 name="password"
@@ -58,7 +58,7 @@ export default function SignIn() {
                 ref={passwordRef}
               />
             </label>
-            <button type="submit">Sign In</button>
+            <button className="basic-input mt-2" type="submit">Sign In</button>
             <hr className="mt-3" />
             <hr />
             <hr />

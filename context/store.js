@@ -11,6 +11,7 @@ import ProfileSvg from "@/components/svgs/ProfileSvg";
 import LogoutSvg from "@/components/svgs/LogoutSvg";
 import GameSvg from "@/components/svgs/GameSvg";
 import SettingsSvg from "@/components/svgs/SettingsSvg";
+import MoonSvg from "@/components/svgs/MoonSvg";
 
 const GlobalContext = createContext();
 
@@ -30,6 +31,11 @@ export const GlobalContextProvider = ({ children }) => {
     // console.log("session:::", session);
     setUser(session?.user);
   }, [session]);
+
+  // useEffect(() => {
+  //   console.log("user:::::, ", user);
+
+  // },[user])
 
   const initialLinks = [
     {
@@ -75,7 +81,6 @@ export const GlobalContextProvider = ({ children }) => {
       active: false,
       style: { scale: "0.8" },
       hoverSvgEffect: true,
-
     },
     {
       link: "/admin-page",
@@ -95,6 +100,14 @@ export const GlobalContextProvider = ({ children }) => {
       text: "logOut",
       icon: LogoutSvg,
       active: false,
+    },
+    {
+      link: "#",
+      text: "Dark Mood",
+      icon: MoonSvg,
+      active: false,
+      style: { scale: "0.725", marginLeft: "-1px" },
+      typeOfElement: "button"
     },
   ];
 

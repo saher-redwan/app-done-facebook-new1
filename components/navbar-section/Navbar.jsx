@@ -10,7 +10,7 @@ export default function Navbar() {
         {/* loadingOfPreparingFiles */}
         <LoadingOfPreparingFiles />
         {/* LOGO */}
-        <Logo />
+        <Logo className='text-[#fff]'/>
         <div className="flex items-center gap-5">
           <RegistrationButtons />
         </div>

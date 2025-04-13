@@ -13,6 +13,7 @@ import {
 import MainLinksMenu from "../basic-items/MainLinksMenu";
 import Logo from "./Logo";
 import { useState } from "react";
+import MenuBtnSvg from "../svgs/MenuBtnSvg";
 
 export default function MenuNavSection() {
   const [openSheet, setOpenSheet] = useState(false);
@@ -26,17 +27,18 @@ export default function MenuNavSection() {
       <Sheet open={openSheet} onOpenChange={setOpenSheet}>
         <SheetTrigger asChild>
           <button className="lg:hidden p-1" onClick={toggleOpenSheet}>
-            <img
+            {/* <img
               src="/images/basic/menu-btn.svg"
               alt=""
               className="w-[2.15rem] h-[2.15rem]"
-            />
+            /> */}
+            <MenuBtnSvg className='w-[2.15rem] h-[2.15rem]'/>
           </button>
         </SheetTrigger>
         <SheetContent side={"left"}>
           <div className="h-full">
-            <Logo forMobileStyle="!text-[#000]" />
-            <div className="mt-4 border-s-[1px] p-1.5 ">
+            <Logo />
+            <div className="mt-4 border-s-[1px] p-1.5 border-[var(--border-color)]">
               <MainLinksMenu
                 forMobileStyle="!static !border-[0] w-full"
                 toggleOpenSheet={toggleOpenSheet}
