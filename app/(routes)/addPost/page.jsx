@@ -81,7 +81,7 @@ export default function AddTask() {
     console.log("data_fetch:::", data_fetch);
     if (data_fetch) {
       router.push("/");
-      router.refresh();
+      // router.refresh();
     } else {
       // alert("Wrong...");
       setError("root", {
@@ -92,6 +92,13 @@ export default function AddTask() {
     }
     // setLoading(true);
   };
+
+  useEffect(() => {
+    // This is to speed up navigation to the next page. (by loading the new page beforehand)
+    if (isSubmitting) {
+      router.prefetch("/");
+    }
+  }, [isSubmitting]);
 
   return (
     <MainContainer>

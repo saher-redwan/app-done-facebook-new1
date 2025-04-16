@@ -36,12 +36,12 @@ export default function EditTaskForm({ id, title, description }) {
     }
   };
 
-  // useEffect(() => {
-  //   // This is to speed up navigation to the next page. (by loading the new page beforehand)
-  //   if (loading) {
-  //     router.prefetch("/");
-  //   }
-  // }, [loading]);
+  useEffect(() => {
+    // This is to speed up navigation to the next page. (by loading the new page beforehand)
+    if (loading) {
+      router.prefetch("/");
+    }
+  }, [loading]);
 
   return (
     <div className="mt-10 px-4">
