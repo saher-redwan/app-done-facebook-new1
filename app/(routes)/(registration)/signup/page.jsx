@@ -1,6 +1,7 @@
 "use client";
 
-import "./style.css";
+import Button from "@/components/basic-items/Button";
+import "../style.css";
 import fetchData from "@/components/custom-hooks/fetchData";
 import UploadButtonItem from "@/components/uploadthing-items/UploadButtonItem";
 import { useGlobalContext } from "@/context/store";
@@ -135,6 +136,7 @@ const UserForm = () => {
                 <input
                   id="email"
                   name="email"
+                  type="text"
                   onChange={handleChangeInput}
                   required={true}
                   value={formData.email}
@@ -196,9 +198,12 @@ const UserForm = () => {
               value="Create User"
               className="bg-blue-300 hover:bg-blue-100"
             /> */}
-              <button type="submit" class="login-btn font-[600]">
+              {/* <button type="submit" class="login-btn font-[600] text-[#fff]">
                 Sign Up
-              </button>
+              </button> */}
+
+              <br />
+              <Button type="submit">Sign Up</Button>
 
               <span>{loadingForm && "loading..."}</span>
             </form>

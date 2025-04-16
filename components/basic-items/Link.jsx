@@ -21,8 +21,6 @@ export default function Link({
   return (
     <NextLink
       href={href}
-      // link or button
-      typeOfElement=""
       onClick={() => {
         href !== "" &&
           !pathname.toLowerCase().includes(href.toLowerCase()) &&

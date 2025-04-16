@@ -72,7 +72,7 @@ export const options = {
             }
           }
         } catch (error) {
-          // console.log(error);
+          console.log("error in login", error);
         }
         return null;
       },
@@ -84,50 +84,58 @@ export const options = {
       // if (trigger === "update") {
       //   token.name = user.name;
       // }
+
+      console.log("user:: ::: :::", user);
+
       if (trigger === "update") {
         console.log("token::", token);
         console.log("session::", session);
 
-        return { ...token, ...session.user };
+        token.name = session.user.name;
+        token.image = session.user.image;
+
+        // return { ...token, ...session.user };
+        console.log("token x::", token);
+
+        return token;
       }
       // console.log("token token", token);
       // console.log("user user", user);
       if (user) {
         token.role = user.role;
         // token.image = user.image;
+        // token = { ...token, ...user };
+        // token = user;
       }
 
-      if (!token?._id || !token?.image) {
+      if (!token?._id) {
         const infoFromDB = await User.findOne({ email: token.email });
         if (!token?._id) {
           token._id = infoFromDB._id;
         }
-        if (token?.image) {
-          token.image = infoFromDB.image;
-        } else {
-          token.image = manEmptyAvatar;
-        }
+        // if (infoFromDB?.image) {
+        //   token.image = infoFromDB.image;
+        // } else {
+        //   token.image = manEmptyAvatar;
+        // }
         // console.log("within infoFromDB... XXX");
       }
 
       return token;
     },
     async session({ session, token }) {
-      // console.log("CCCCCCCC", token);
-
       if (session?.user) {
         session.user.role = token.role;
       }
 
       session.user._id = token._id;
 
-      if (session?.user?.image) {
+      if (token?.image && manEmptyAvatar == manEmptyAvatar) {
         session.user.image = token.image;
       } else {
         session.user.image = manEmptyAvatar;
       }
 
-      // // console.log("session::::  :::::  :::::", session);
       return session;
     },
     // me

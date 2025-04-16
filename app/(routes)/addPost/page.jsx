@@ -124,7 +124,9 @@ export default function AddTask() {
         <div className="border-t-2 pt-1">
           {errors.root && <b className="text-red-500">{errors.root.message}</b>}
         </div>
-        <Button loading={isSubmitting}>Add Task</Button>
+        <Button type="submit" loading={isSubmitting}>
+          Add Task
+        </Button>
       </form>
     </MainContainer>
   );

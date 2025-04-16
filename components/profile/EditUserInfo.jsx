@@ -66,10 +66,10 @@ export default function EditUserInfo({
   async function updateUserOperation() {
     await changeUserData(userId, { newName, newImg: imgUrl });
     await updateNameForPosts({ newName, newImg: imgUrl });
-    sessionUpdate({
-      ...session,
+    await sessionUpdate({
+      // ...session,
       user: {
-        ...session.user,
+        // ...session.user,
         name: newName,
         // this will put the image property only if it existed
         ...(imgUrl && { image: imgUrl }),

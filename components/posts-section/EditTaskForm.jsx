@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "../basic-items/Button";
 import fetchData from "../custom-hooks/fetchData";
@@ -27,12 +27,21 @@ export default function EditTaskForm({ id, title, description }) {
     setLoading(false);
 
     if (data) {
+      // router.push("/"); // not use this in this case, instead we
+
       router.push("/");
-      router.refresh();
+      // router.refresh();
     } else {
       alert("Wrong...");
     }
   };
+
+  // useEffect(() => {
+  //   // This is to speed up navigation to the next page. (by loading the new page beforehand)
+  //   if (loading) {
+  //     router.prefetch("/");
+  //   }
+  // }, [loading]);
 
   return (
     <div className="mt-10 px-4">
@@ -54,7 +63,7 @@ export default function EditTaskForm({ id, title, description }) {
           placeholder="Task Description"
         />
 
-        <Button loading={loading} main={true}>
+        <Button type="submit" loading={loading} main={true}>
           Update Task
         </Button>
       </form>

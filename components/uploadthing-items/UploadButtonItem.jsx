@@ -143,10 +143,10 @@ export default function UploadButtonItem({
               fatherItem.querySelector(".my-uploadThing-item-- input").click()
             }
             styleOfButton="outline"
-            className="border-dotted border-[var(--border-color)] mt-7 mb-4"
+            className="w-full border-dotted border-[var(--border-color)] mt-7 mb-6 text-[var(--text-light-color)]"
             style={{ borderWidth: "3.25px" }}
           >
-            choose file
+            choose image
           </Button>
         )}
 

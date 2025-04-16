@@ -33,12 +33,9 @@ export default function MainLinksMenu({
         {links?.map((link, index) => {
           // case no user
           if (!user?._id) {
-            if (
-              link.link.startsWith("/profile") ||
-              link.link.startsWith("?loggedOut")
-            ) {
-              console.log("from denied");
-              return;
+            if (link?.authorized) {
+              // console.log("from denied");
+              return null;
             } else {
               return (
                 <LinkItem
@@ -70,30 +67,66 @@ const classText =
   "flex items-center gap-1.5 hover:bg-[var(--so-light-color)] py-1 rounded-[0px_var(--border-radius)_var(--border-radius)_0px] px-2";
 
 function LinkItem({ link, toggleOpenSheet }) {
+  const { setDarkMode, setLinks } = useGlobalContext();
+
   const content = (
     <>
-      <span style={link?.style}>
+      <span style={link?.styleOfSvg}>
         <link.icon width="2.25rem" height="2.25rem" />
       </span>
       <span>{link.text}</span>
     </>
   );
 
-  // this for button such as login button.
-  if (link.link == "?loggedOut") {
+  // this for buttons such as login button.
+  if (link?.typeOfElement == "button") {
+    // darkMode and light
+    if (link?.purpose == "darkMode" && !link?.display) {
+      return null;
+    }
+
+    // normal button
     return (
       <button
         type="button"
-        href={link.link}
-        key={Math.random()}
-        className={`${link.active ? "active-link" : ""} ${classText}`}
-        onClick={() => link.text == "logOut" && signOut()}
+        className={`${classText}`}
+        onClick={() => {
+          if (link?.purpose == "darkMode") {
+            // for animation design
+            // dark-light mood buttons
+            setLinks((prev) => {
+              return prev.map((item) => {
+                if (item.purpose == "darkMode") {
+                  return { ...item, isClicked: true, display: !item.display };
+                }
+                return item;
+              });
+            });
+
+            document.body.classList.toggle("dark-theme");
+            setDarkMode((prev) => !prev);
+          }
+
+          // logout button
+          link?.purpose == "logout" && signOut();
+        }}
+        style={{
+          animationName:
+            link?.purpose == "darkMode" &&
+            link?.isClicked &&
+            "opacity-animation",
+          animationDuration:
+            link?.purpose == "darkMode" && link?.isClicked && "1.45s",
+          transformOrigin:
+            link?.purpose == "darkMode" && link?.isClicked && "top",
+        }}
       >
         {content}
       </button>
     );
   }
 
+  // for style on hover
   function chechTextOfLinks(link) {
     if (link?.hoverSvgEffect) {
       switch (link.link) {
@@ -113,17 +146,9 @@ function LinkItem({ link, toggleOpenSheet }) {
       </div> */}
       <Link
         href={link.link}
-        key={Math.random()}
-        typeOfElement={link.typeOfElement}
         className={`${link.active ? "active-link" : ""} ${
           link?.hoverSvgEffect ? chechTextOfLinks(link) : ""
         } ${classText}`}
-        onClick={() =>
-          link.text == "logOut"
-            ? signOut()
-            : link.text == "Dark Mood" &&
-              document.body.classList.toggle("dark-theme")
-        }
       >
         {content}
       </Link>

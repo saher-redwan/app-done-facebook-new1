@@ -27,8 +27,7 @@ const AddNewPost = ({ posts, setPosts }) => {
 
   const { user } = useGlobalContext();
 
-console.log("here user::: ," , user);
-
+  console.log("here user::: ,", user);
 
   const route = useRouter();
 
@@ -157,9 +156,9 @@ console.log("here user::: ," , user);
 
   function handleChangeTitle(e) {
     const value = e.target.value;
-    if (value.length > 10) {
+    if (value.length > 150) {
       setTitle((prev) => prev);
-      setErrMessage("It is not allowed to exceed 250 characters.");
+      setErrMessage("It is not allowed to exceed 150 characters.");
     } else {
       setTitle(value);
       setErrMessage("");

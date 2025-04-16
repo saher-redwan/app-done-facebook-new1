@@ -32,7 +32,9 @@ export default function RootLayout({ children }) {
       {/* App */}
       <AuthProvider>
         <GlobalContextProvider>
-          <body className={` dark-theme`}>
+          <body
+          // className={`dark-theme`}
+          >
             <Navbar />
             <div>{children}</div>
             <LoadingEquipment />

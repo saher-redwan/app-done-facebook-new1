@@ -28,9 +28,10 @@ export default function LoadingOfPreparingFiles() {
         <LoadingSpinner />
       </div>
       {/*  */}
-      {[...Array(10)].map(() => {
+      {[...Array(10)].map((_, index) => {
         return (
           <div
+            key={index}
             ref={ref}
             className={`${
               loadingOfPreparingFiles ? "disable-click-overlay" : "hidden"
