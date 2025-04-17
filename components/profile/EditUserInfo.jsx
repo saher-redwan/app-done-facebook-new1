@@ -64,7 +64,11 @@ export default function EditUserInfo({
 
   // for image upload
   async function updateUserOperation() {
-    await changeUserData(userId, { newName, newImg: imgUrl });
+    await changeUserData(userId, {
+      newName,
+      newImg: imgUrl,
+      // ...(user?.role == "Google User" && { role: user?.role }),
+    });
     await updateNameForPosts({ newName, newImg: imgUrl });
     await sessionUpdate({
       // ...session,
