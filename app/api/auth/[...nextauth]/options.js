@@ -80,22 +80,42 @@ export const options = {
   ],
   callbacks: {
     async jwt({ token, user, trigger, session }) {
-      // console.log("token,,", token);
-      // if (trigger === "update") {
-      //   token.name = user.name;
-      // }
 
-      console.log("user:: ::: :::", user);
+      // console.log("objects { token, user, trigger, session }, :::", {
+      //   token,
+      //   user,
+      //   trigger,
+      //   session,
+      // });
+
+      // To unify the (image) proparity of the token object
+      if (!token?.image && token?.picture) {
+        token.image = token?.picture;
+      }
+
+
+      console.log("session.user.image", session?.user?.image);
+
+      console.log("here: token.image", token?.image);
 
       if (trigger === "update") {
-        console.log("token::", token);
-        console.log("session::", session);
+        // console.log("token::", token);
+        // console.log("session::", session);
+
+        console.log("UPDATE objects { token, user, trigger, session }, :::", {
+          token,
+          user,
+          trigger,
+          session,
+        });
+
+        console.log("session session", session);
 
         token.name = session.user.name;
         token.image = session.user.image;
 
         // return { ...token, ...session.user };
-        console.log("token x::", token);
+        // console.log("token x::", token);
 
         return token;
       }
@@ -109,6 +129,8 @@ export const options = {
       }
 
       if (!token?._id) {
+        console.log("no id :::");
+
         const infoFromDB = await User.findOne({ email: token.email });
         if (!token?._id) {
           token._id = infoFromDB._id;
@@ -124,13 +146,15 @@ export const options = {
       return token;
     },
     async session({ session, token }) {
+      console.log("{ session, token } :::", { session, token });
+
       if (session?.user) {
         session.user.role = token.role;
       }
 
       session.user._id = token._id;
 
-      if (token?.image && manEmptyAvatar == manEmptyAvatar) {
+      if (token?.image && token?.image != manEmptyAvatar) {
         session.user.image = token.image;
       } else {
         session.user.image = manEmptyAvatar;
@@ -140,6 +164,8 @@ export const options = {
     },
     // me
     async signIn({ account, profile }) {
+      console.log("{ account, profile } :::", { account, profile });
+
       if (account.provider == "google") {
         // console.log("from GOOGLE Provider::: ", profile);
 

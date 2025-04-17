@@ -146,7 +146,7 @@ export default function EditUserInfo({
           }}
         >
           <div className={`${loadingForm ? "disabled-all" : ""}`}>
-            <label className="flex gap-1 flex-col max-w-[300px]">
+            <label className="flex gap-1 flex-col">
               <span>Enter Name:</span>
               <input
                 onChange={(e) => setNewName(e.target.value)}

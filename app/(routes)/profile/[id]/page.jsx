@@ -72,7 +72,7 @@ export default function Profile() {
   return (
     <MainContainer>
       <div className="">
-        <div className="px-3 sm:px-0 ">
+        <div className="px-3 sm:px-0 w-full sm:w-[375px] ">
           {loadingStuffForUser() && (
             <div className="flex justify-center mt-4">
               <LoadingSpinner />
@@ -95,7 +95,7 @@ export default function Profile() {
 
               <Button
                 onClick={() => setOpenUpdateDateForm((prev) => !prev)}
-                className="custom-background my-3 bg-[var(--dark-color)] flex items-end"
+                className="custom-background my-3 bg-[var(--dark-color)] flex items-end w-full sm:w-fit sm:px-4 "
               >
                 <EditSvg className="w-[22px] invert-[0.9]" />
                 <span>edit your information</span>

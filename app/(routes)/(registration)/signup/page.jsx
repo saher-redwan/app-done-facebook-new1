@@ -69,9 +69,10 @@ const UserForm = () => {
 
     if (!data_fetch) {
       // const response = await res.json();
+      setLoadingForm(false);
       setErrorMessage("something wrong!");
     } else {
-      router.refresh();
+      // router.refresh();
       router.push("/signin");
     }
   }
@@ -202,12 +203,19 @@ const UserForm = () => {
                 Sign Up
               </button> */}
 
-              <br />
-              <Button type="submit">Sign Up</Button>
+              {errorMessage && (
+                <p className="danger mb-3 animate-[scale-appear_1s_ease-in-out]">
+                  {errorMessage}
+                </p>
+              )}
 
-              <span>{loadingForm && "loading..."}</span>
+              <Button type="submit" loading={loadingForm}>
+                Sign Up
+              </Button>
+
+              {/* <span>{loadingForm && "loading..."}</span> */}
             </form>
-            <p className="text-red-500">{errorMessage}</p>
+
             <div class="or-divider">OR</div>
             <button onClick={signUpWithGoogle} type="button" class="google-btn">
               SignUp with

@@ -28,15 +28,16 @@ export default function SignupForm() {
       "content-type": "application/json",
     });
 
-    if (!res.ok) {
+    if (res.ok) {
+      // router.refresh();
+      router.push("/");
+    } else {
       const response = await res.json();
       setErrorMessage(response.message);
-    } else {
-      router.refresh();
-      router.push("/");
     }
     setLoading(false);
   };
+  
 
   return (
     <>

@@ -37,7 +37,6 @@ export default function EditTaskForm({ id, title, description }) {
   };
 
   useEffect(() => {
-    // This is to speed up navigation to the next page. (by loading the new page beforehand)
     if (loading) {
       router.prefetch("/");
     }

@@ -173,6 +173,9 @@ body,
   .title {
     @apply text-xl;
   }
+  .danger {
+    @apply font-bold text-[var(--danger-color)];
+  }
 }
 
 body {
@@ -211,6 +214,7 @@ svg {
   height: unset; */
   /* width: 2.25rem;
   height: 2.25rem; */
+  height: unset;
 }
 
 button {
