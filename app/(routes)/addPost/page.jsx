@@ -18,10 +18,10 @@ export default function AddTask() {
 
   const { user } = useGlobalContext();
 
-  // console.log(user);
+  console.log("user is", user);
 
   const router = useRouter();
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   const schema = z.object({
     // email: z.string().email(),
@@ -72,9 +72,9 @@ export default function AddTask() {
         // image: null,
         // userImage: session?.user?.image || null,
         user: {
-          email: session?.user?.email,
-          image: session?.user?.image || null,
-          publisher: session?.user?.name || session?.user?.email,
+          email: user?.email,
+          publisher: user?.name,
+          image: user?.image,
         },
       }
     );

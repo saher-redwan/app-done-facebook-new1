@@ -76,7 +76,7 @@ export async function POST(request) {
     title,
     description,
     image,
-    user: { publisher, email, userImage, _id },
+    user: { publisher, email, image: userImage, _id },
     likes: {
       users: [
         // {_id: "", name: "", img: ""}
