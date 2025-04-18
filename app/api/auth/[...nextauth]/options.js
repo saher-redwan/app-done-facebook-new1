@@ -250,10 +250,10 @@ export const options = {
       // this return for other providers...
       return true;
     },
-    async redirect({ url, baseUrl }) {
-      // default baseUrl is NEXTAUTH_URL, but because I need to use it in client side I use NEXT_PUBLIC_
-      return `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`;
-    },
+    // async redirect({ url, baseUrl }) {
+    //   // default baseUrl is NEXTAUTH_URL, but because I need to use it in client side I use NEXT_PUBLIC_
+    //   return `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`;
+    // },
   },
   pages: {
     signIn: "/signin",
