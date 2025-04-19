@@ -9,7 +9,8 @@ import PostPopover from "./PostPopover";
 import { motion } from "framer-motion";
 import { zeroingTheLength } from "@/lib/utils";
 import DeletePostAlert from "./DeletePostAlert";
-
+import Image from "next/image";
+import CancelSvg from "../svgs/CancelSvg";
 // lazy imports
 // const TempOne = dynamic(() => import("./TempOne"), {
 //   loading: () => <LoadingProcess />,
@@ -33,7 +34,7 @@ export default function SinglePost(props) {
 
   const postRef = useRef();
 
-  useEffect(() => {    
+  useEffect(() => {
     console.log("from sinlge post");
 
     // For show btn logic
@@ -69,6 +70,61 @@ export default function SinglePost(props) {
   //
   const [openPostOptions, setOpenPostOptions] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
+
+  const imgOfPostRef = useRef();
+  const [objectFitOfPostImg, setObjectFitOfPostImg] = useState("cover");
+
+  // eidt objectFit of the img;
+  const check = () => {
+    console.log("5465456464");
+
+    if (imgOfPostRef.current?.offsetHeight / window.innerHeight < 80 / 100) {
+      // cover
+      setObjectFitOfPostImg("cover");
+    } else {
+      // container
+      setObjectFitOfPostImg("contain");
+    }
+  };
+
+  useEffect(() => {
+    imgOfPostRef.current?.addEventListener("load", () => {
+      check();
+      imgOfPostRef.current.style.opacity = "1";
+    });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", check);
+
+    // cleanUp
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  // open post img
+  const [openPostImg, setOpenPostImg] = useState(false);
+
+  useEffect(() => {
+    if (openPostImg) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [openPostImg]);
+
+  // useEffect(() => {
+  //   const handleClick = (event) => {
+  //     if (imgOfPostRef.current != event.target) {
+  //       setOpenPostImg(false);
+  //     }
+  //   };
+  //   document.addEventListener("click", handleClick);
+
+  //   // Cleanup listener on component unmount
+  //   return () => {
+  //     document.removeEventListener("click", handleClick);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -107,10 +163,12 @@ export default function SinglePost(props) {
                   }
                   className="font-bold flex items-center gap-2 text-sm w-fit"
                 >
+                  {console.log(post)
+                }
                   {post?.user?.userImage && (
                     <div>
                       <img
-                        // src={post?.useruserImage}
+                        // src={post?.userImage}
                         src={post?.user?.userImage}
                         alt=""
                         className="w-[25px] h-[25px] rounded-[6px] object-cover"
@@ -143,7 +201,7 @@ export default function SinglePost(props) {
           </div>
 
           <div>
-            <div className="px-4 mb-2">
+            <div className="px-4 mb-3">
               <h2 className="font-bold text-[1.158rem] mt-2.5">{post.title}</h2>
               <p
                 ref={paragraphItem}
@@ -162,7 +220,6 @@ export default function SinglePost(props) {
                 {post.description}
               </p>
             </div>
-
             {!hideShowBtn && (
               <div
                 onClick={() => {
@@ -181,14 +238,71 @@ export default function SinglePost(props) {
             )}
 
             {post?.image && (
-              <div>
-                <img
+              <div
+                // ref={postImgContainer}
+
+                // onMouseLeave={() => setOpenPostImg((prev) => !prev)}
+                className={`${
+                  openPostImg
+                    ? "fixed top-0 left-[50%] translate-x-[-50%] w-fit h-[100vh] z-[100] overflow-auto"
+                    : ""
+                }`}
+                style={{
+                  boxShadow: openPostImg && "0 0 18px var(--box-shadow-color)",
+                }}
+              >
+                <div>
+                  {/* <img
                   src={post?.image}
                   alt=""
                   className="w-full max-h-[80vh] object-cover rounded-none"
-                />
+                /> */}
+                  <Image
+                    ref={imgOfPostRef}
+                    src={post?.image}
+                    onClick={() =>
+                      objectFitOfPostImg == "contain" && setOpenPostImg(true)
+                    }
+                    alt="img"
+                    className="w-full max-h-[80vh] object-cover rounded-none"
+                    width="500"
+                    height="500"
+                    quality={100}
+                    style={{
+                      objectFit: objectFitOfPostImg,
+                      opacity: "0",
+                      transition: "0.25s",
+                      maxHeight: openPostImg ? "unset" : "80vh",
+                      cursor: openPostImg
+                        ? "unset"
+                        : objectFitOfPostImg == "contain"
+                        ? "pointer"
+                        : "unset",
+                    }}
+                    // placeholder="blur"
+                    //
+                  />
+
+                  {/* Cancel zoom */}
+                  <CancelSvg
+                    className="close-postImg-btn absolute top-0 w-[35px] h-[35px] bg-[var(--border-color)] rounded-full right-0 opacity-80 cursor-pointer"
+                    onClick={() => setOpenPostImg(false)}
+                    style={{ display: openPostImg ? "block" : "none" }}
+                  />
+                </div>
               </div>
             )}
+            {/* overlay */}
+            <div
+              className="fixed top-0 left-0 w-[100vw] h-[100vh] z-10 bg-[var(--black-overlay)]"
+              onClick={() => setOpenPostImg(false)}
+              style={{
+                opacity: openPostImg ? "1" : "0",
+                transition: "0.385s",
+                pointerEvents: openPostImg ? "unset" : "none",
+                // backgroundColor: "var(--black-overlay)",
+              }}
+            ></div>
           </div>
         </div>
 

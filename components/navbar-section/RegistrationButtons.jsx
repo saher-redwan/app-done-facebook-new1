@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { getServerSession } from "next-auth";
 import SignOut from "./SignOut";
 import fetchData from "../custom-hooks/fetchData";
 import getUserInfoByEmail from "@/server-actions/getUserInfoByEmail";
 import MenuNavSection from "./MenuNavSection";
 import { manEmptyAvatar } from "@/lib/utils";
+import Link from "../basic-items/Link";
 
 // export const dynamic = 'force-dynamic'
 
@@ -81,6 +81,18 @@ export default async function RegistrationButtons() {
         </>
       ) : (
         <>
+          {/* <Link
+            href="/signin"
+            className="text-[#fff] font-medium tracking-[1.5px]"
+          >
+            SignIn
+          </Link>
+          <Link
+            href="/signup"
+            className="text-[#fff] font-medium tracking-[1.5px]"
+          >
+            SignUp
+          </Link> */}
           <Link
             href="/signin"
             className="text-[#fff] font-medium tracking-[1.5px]"

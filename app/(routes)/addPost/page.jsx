@@ -74,7 +74,7 @@ export default function AddTask() {
         user: {
           email: user?.email,
           publisher: user?.name,
-          image: user?.image,
+          userImage: user?.image,
         },
       }
     );

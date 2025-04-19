@@ -15,8 +15,16 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "utfs.io",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
+
+  // for audio
   webpack: (config) => {
     // Add a rule for audio files
     config.module.rules.push({

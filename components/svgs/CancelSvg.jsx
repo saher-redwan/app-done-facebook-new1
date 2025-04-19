@@ -1,0 +1,47 @@
+import React from "react";
+
+export default function CancelSvg({ ...props }) {
+  return (
+    <svg
+      // version="1.1"
+      // id="Layer_1"
+      // xmlns="http://www.w3.org/2000/svg"
+      // xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 32 32"
+      // enable-background="new 0 0 32 32"
+      // xml:space="preserve"
+      {...props}
+      className={`need-invert ${props.className}`}
+    >
+      <circle
+        fill="none"
+        stroke="#000000"
+        stroke-width="2"
+        stroke-miterlimit="10"
+        cx="16"
+        cy="16"
+        r="12"
+      />
+      <line
+        fill="none"
+        stroke="#000000"
+        stroke-width="2"
+        stroke-miterlimit="10"
+        x1="11.5"
+        y1="11.5"
+        x2="20.5"
+        y2="20.5"
+      />
+      <line
+        fill="none"
+        stroke="#000000"
+        stroke-width="2"
+        stroke-miterlimit="10"
+        x1="20.5"
+        y1="11.5"
+        x2="11.5"
+        y2="20.5"
+      />
+    </svg>
+  );
+}

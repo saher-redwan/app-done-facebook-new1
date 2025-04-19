@@ -57,7 +57,7 @@ const AddNewPost = ({ posts, setPosts }) => {
     setLoadingForm(true);
 
     // here will post without img, otherwise will post with img using useEffect below...
-    if (!imgSelected) {
+    if (!imgSelected) {      
       await postOperation();
     }
   };
@@ -134,6 +134,8 @@ const AddNewPost = ({ posts, setPosts }) => {
         setImgUrl("");
         // }, 900);
       }, 1400);
+      console.log("sssssssssssssssssss",data_fetch);
+      
     } else {
       // console.log("Error in server..., sorry");
     }

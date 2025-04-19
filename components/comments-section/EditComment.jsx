@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 // import Modal from "../basic-items/Modal";
 import fetchData from "../custom-hooks/fetchData";
 
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -14,6 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Button from "../basic-items/Button";
 
 export default function EditComment({
   text,
@@ -166,7 +166,10 @@ export default function EditComment({
             />
 
             <DialogFooter className="mt-5 font-[600]">
-              <button type="submit">Save changes</button>
+              <Button type="submit" loading={loading}>
+                Save changes
+              </Button>
+              {/* <button type="submit">Save changes</button> */}
             </DialogFooter>
           </form>
         </DialogContent>

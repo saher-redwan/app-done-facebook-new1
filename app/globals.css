@@ -33,6 +33,7 @@
     --border-radius: 7px;
     --post-bg: #fff;
     --post-text-shadow: rgb(119, 119, 119) 2px 0px 4px;
+    --screen-without-navbar: calc(100vh - 52px);
     /* colors */
     --primary-color: #007ea7;
     --secondary-color: #f79256;
@@ -41,6 +42,8 @@
     --so-light-color: #f1f5f9;
     --dark-color: #003459;
     --black-color: #00171f;
+    --black-overlay: #00000033;
+    --box-shadow-color: #0000006b;
     --navy-blue: #374151;
     --gray-color: #999;
     --gray-light-color: #f1f1f1;
@@ -119,6 +122,8 @@ body,
   --so-light-color: #1b1b1b;
   --dark-color: #003459;
   --black-color: #00171f;
+  --black-overlay: #0000006b;
+  --box-shadow-color: #000000b5;
   --navy-blue: #8895ab;
   --gray-color: #999;
   --gray-light-color: #202020;
@@ -140,6 +145,12 @@ body,
 
   svg.need-invert {
     filter: opacity(0.75) invert(1);
+  }
+}
+
+body.dark-theme {
+  .close-postImg-btn * {
+    stroke: #fff;
   }
 }
 

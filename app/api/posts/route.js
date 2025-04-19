@@ -62,6 +62,7 @@ export async function GET(request) {
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit_perPage);
+
   return NextResponse.json({ posts, hasMore });
 }
 
@@ -76,7 +77,7 @@ export async function POST(request) {
     title,
     description,
     image,
-    user: { publisher, email, image: userImage, _id },
+    user: { publisher, email, userImage, _id },
     likes: {
       users: [
         // {_id: "", name: "", img: ""}

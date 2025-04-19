@@ -1,0 +1,18 @@
+.edit_svg_container {
+  transition: 0.7s all, 0s filter;
+  &:hover svg {
+    filter: unset;
+    & * {
+      stroke: var(--success-color);
+    }
+  }
+}
+.delete_svg_container {
+  transition: 0.7s all, 0s filter;
+  &:hover svg {
+    filter: unset;
+    & * {
+      fill: var(--danger-color);
+    }
+  }
+}

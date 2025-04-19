@@ -2,10 +2,9 @@ import Link from "@/components/basic-items/Link";
 
 export default function page() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[var(--so-light-color)] ">
+    <div className="flex items-center justify-center h-[var(--screen-without-navbar)] bg-[var(--background-color-2)] ">
       <div
-        className="bg-[var(--background-color)] p-8 rounded-lg shadow-lg text-center animate-fade-in 
-      -mt-[10vh]"
+        className="bg-[var(--so-light-color)] p-8 rounded-lg shadow-lg text-center animate-fade-in"
       >
         <div className="text-3xl font-bold text-[var(--navy-blue)] mb-4">
           It may be developed later.
@@ -16,7 +15,7 @@ export default function page() {
         <Link
           href="/"
           className="link mt-8 w-full"
-          style={{ outline: "1px solid var(--primary-color)" }}
+          style={{ outline: "1px solid var(--gray-color)" }}
         >
           Back to Home
         </Link>
