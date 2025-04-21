@@ -117,7 +117,12 @@ const UserForm = () => {
         <div className="signup-page--">
           <div className="login-container">
             <h2>sign up</h2>
-            <form onSubmit={signUpWithCredentials} method="post" className="">
+
+            <form
+              onSubmit={signUpWithCredentials}
+              method="post"
+              className={`${loadingForm ? "disabled-all" : ""}`}
+            >
               {/* <h1 className="font-bold text-3xl">SignUp</h1> */}
               {/* <label>Full Name</label> */}
               <div class="input-group">
@@ -217,7 +222,11 @@ const UserForm = () => {
             </form>
 
             <div class="or-divider">OR</div>
-            <button onClick={signUpWithGoogle} type="button" class="google-btn">
+            <button
+              onClick={signUpWithGoogle}
+              type="button"
+              class={`google-btn ${loadingForm ? "disabled-all" : ""}`}
+            >
               SignUp with
               <img src="https://www.google.com/favicon.ico" alt="Google Icon" />
             </button>

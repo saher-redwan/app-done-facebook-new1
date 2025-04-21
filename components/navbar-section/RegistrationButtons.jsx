@@ -93,6 +93,7 @@ export default async function RegistrationButtons() {
           >
             SignUp
           </Link> */}
+
           <Link
             href="/signin"
             className="text-[#fff] font-medium tracking-[1.5px]"
@@ -105,6 +106,8 @@ export default async function RegistrationButtons() {
           >
             SignUp
           </Link>
+
+          <MenuNavSection />
         </>
       )}
     </>
